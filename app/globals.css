@@ -26,6 +26,7 @@ body {
 button, a { font: inherit; }
 button { cursor: pointer; }
 img { display: block; max-width: 100%; }
+.mobile-season-label { display: none; }
 
 .site-header {
   position: absolute;
@@ -358,7 +359,7 @@ footer p { margin: 0; color: rgba(255,255,255,.55); font-size: 10px; }
   .modal { padding: 20px; }
 }
 
-/* 依頼仕様：サイトの主要文字は24pt以上 */
+/* PCでは読みやすい24ptを維持し、スマホだけ19pt基準に調整 */
 body { font-size: 24pt; line-height: 1.65; }
 p,
 button,
@@ -390,12 +391,94 @@ footer p { font-size: 24pt; }
 .spot-panel h3, .journey-grid h3 { font-size: 34pt; }
 
 @media (max-width: 680px) {
-  .season-backdrop { grid-template-columns: repeat(4, 1fr); }
-  .season-panel > span { right: 12px; bottom: 86px; width: 52px; height: 52px; }
+  body { font-size: 19pt; }
+  p,
+  button,
+  a,
+  dt,
+  dd,
+  .eyebrow,
+  .brand strong,
+  .brand small,
+  .hero-note,
+  .tap-hint,
+  .card-topline,
+  .card-title small,
+  .card-title em,
+  .card-footer-line,
+  .stage-label,
+  .map-legend,
+  .spot-area,
+  .spot-description,
+  .spot-tags span,
+  .prototype-note,
+  .boundary-credit,
+  .journey-grid span,
+  .journey-grid p,
+  footer strong,
+  footer p { font-size: 19pt; }
+
+  .mobile-season-label {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    margin: 0 0 20px;
+    padding: 8px 14px;
+    color: white;
+    background: rgba(7, 59, 41, .88);
+    border: 1px solid rgba(255, 255, 255, .42);
+    border-radius: 999px;
+    font-size: 14pt;
+    font-weight: 800;
+    letter-spacing: .12em;
+    line-height: 1.2;
+    backdrop-filter: blur(8px);
+  }
+
+  .season-backdrop { display: none; }
   .site-header { gap: 8px; }
   .brand-logo-image { width: 190px; }
-  .hero h1 { font-size: 40pt; }
-  .section-heading h2, .map-heading h2, .journey-section h2 { font-size: 36pt; }
+  .hero {
+    background:
+      linear-gradient(180deg, rgba(4, 40, 27, .38), rgba(4, 40, 27, .9)),
+      url('/season-spring.png') center / cover no-repeat;
+  }
+  .hero::before {
+    background: linear-gradient(180deg, rgba(4, 40, 27, .28), rgba(4, 40, 27, .72));
+  }
+  .hero h1 { font-size: 35pt; }
+  .hero-copy { background: rgba(4, 48, 32, .7); }
+
+  .card-section {
+    max-width: none;
+    margin: 0;
+    color: var(--forest-ink);
+    background:
+      linear-gradient(rgba(255, 253, 248, .84), rgba(245, 241, 232, .92)),
+      url('/season-summer.png') center / cover no-repeat;
+  }
+  .card-section .section-heading,
+  .card-section .card-stage { position: relative; z-index: 1; }
+  .card-section .mobile-season-label { color: white; }
+  .card-stage { background: rgba(245, 241, 232, .82); backdrop-filter: blur(7px); }
+
+  .map-section {
+    background:
+      linear-gradient(rgba(7, 59, 41, .82), rgba(6, 45, 32, .94)),
+      url('/season-autumn.png') center / cover no-repeat;
+  }
+
+  .journey-section {
+    background:
+      linear-gradient(rgba(245, 241, 232, .86), rgba(255, 253, 248, .94)),
+      url('/season-winter.png') center / cover no-repeat;
+  }
+  .journey-section > .mobile-season-label { margin-inline: auto; }
+  .journey-grid article { background: rgba(255, 253, 248, .92); backdrop-filter: blur(7px); }
+
+  .section-heading h2, .map-heading h2, .journey-section h2 { font-size: 31pt; }
+  .card-title strong { font-size: 37pt; }
+  .spot-panel h3, .journey-grid h3 { font-size: 29pt; }
   .map-legend { left: 12px; right: 12px; bottom: 12px; }
 }
 

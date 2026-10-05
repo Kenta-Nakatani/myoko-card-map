@@ -46,6 +46,7 @@ export default function Home() {
           ))}
         </div>
         <div className="hero-copy">
+          <span className="mobile-season-label">SPRING / 春</span>
           <p className="eyebrow">MYOKO CARD × DIGITAL MAP</p>
           <h1>
             一枚のカードから、<br />
@@ -74,6 +75,7 @@ export default function Home() {
 
       <section className="card-section" id="card">
         <div className="section-heading">
+          <span className="mobile-season-label">SUMMER / 夏</span>
           <p className="eyebrow green">THE FIRST CARD</p>
           <h2>妙高高原を、<br />持ち歩く。</h2>
           <p>
@@ -98,6 +100,7 @@ export default function Home() {
       <section className="map-section" id="map">
         <div className="map-heading">
           <div>
+            <span className="mobile-season-label">AUTUMN / 秋</span>
             <p className="eyebrow light">FROM CARD TO PLACE</p>
             <h2>カードの景色を、<br />地図で見つける。</h2>
           </div>
@@ -109,6 +112,7 @@ export default function Home() {
       </section>
 
       <section className="journey-section">
+        <span className="mobile-season-label">WINTER / 冬</span>
         <p className="eyebrow green">HOW IT WORKS</p>
         <h2>小さなカードが、<br />次の行き先をつくる。</h2>
         <div className="journey-grid">
