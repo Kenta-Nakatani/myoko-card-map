@@ -27,6 +27,7 @@ button, a { font: inherit; }
 button { cursor: pointer; }
 img { display: block; max-width: 100%; }
 .mobile-season-label { display: none; }
+.mobile-season-photo { display: none; }
 
 .site-header {
   position: absolute;
@@ -480,6 +481,169 @@ footer p { font-size: 24pt; }
   .card-title strong { font-size: 37pt; }
   .spot-panel h3, .journey-grid h3 { font-size: 29pt; }
   .map-legend { left: 12px; right: 12px; bottom: 12px; }
+}
+
+/* スマホ再設計：写真を独立して見せ、文字の階層を明確にする */
+@media (max-width: 680px) {
+  body { font-size: 16px; line-height: 1.75; }
+  p,
+  button,
+  a,
+  dt,
+  dd,
+  .eyebrow,
+  .brand strong,
+  .brand small,
+  .hero-note,
+  .tap-hint,
+  .card-topline,
+  .card-title small,
+  .card-title em,
+  .card-footer-line,
+  .stage-label,
+  .map-legend,
+  .spot-area,
+  .spot-description,
+  .spot-tags span,
+  .prototype-note,
+  .boundary-credit,
+  .journey-grid span,
+  .journey-grid p,
+  footer strong,
+  footer p { font-size: inherit; }
+
+  .mobile-season-photo {
+    position: relative;
+    display: block;
+    width: auto;
+    height: clamp(280px, 84vw, 380px);
+    overflow: hidden;
+  }
+  .mobile-season-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(3, 27, 18, .02) 52%, rgba(3, 27, 18, .58));
+  }
+  .mobile-season-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .mobile-season-photo > span {
+    position: absolute;
+    z-index: 2;
+    left: 20px;
+    bottom: 18px;
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .18em;
+    line-height: 1;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, .4);
+  }
+  .mobile-season-photo b {
+    display: inline-grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    margin-left: 8px;
+    color: var(--forest-ink);
+    background: rgba(255, 255, 255, .94);
+    border-radius: 50%;
+    font-size: 14px;
+    letter-spacing: 0;
+  }
+  .mobile-spring-photo img { object-position: 52% center; }
+  .mobile-summer-photo img { object-position: 57% center; }
+  .mobile-autumn-photo img { object-position: 52% center; }
+  .mobile-winter-photo img { object-position: 56% center; }
+
+  .eyebrow { margin-bottom: 13px; font-size: 11px; letter-spacing: .18em; }
+  .eyebrow::before { width: 20px; margin-right: 8px; }
+  .primary-button,
+  .text-button,
+  .sub-button { font-size: 15px; }
+  .lead,
+  .section-heading > p:not(.eyebrow),
+  .map-heading > p,
+  .journey-grid p,
+  .spot-description { font-size: 16px; }
+  .hero-note,
+  .tap-hint,
+  .card-specs dt,
+  .map-legend,
+  .spot-area,
+  .spot-tags span,
+  .prototype-note,
+  .boundary-credit,
+  .journey-grid span,
+  footer p { font-size: 12px; }
+  .card-specs dd { font-size: 14px; }
+  .card-topline { font-size: 10px; }
+  .card-title small { font-size: 11px; }
+  .card-title em { font-size: 12px; }
+  .card-footer-line { font-size: 9px; }
+
+  .mobile-season-label { display: none; }
+  .site-header { padding: 16px 16px; gap: 8px; }
+  .brand-logo-image { width: 152px; padding: 5px 7px; border-radius: 10px; }
+  .header-cta { padding: 7px 11px; font-size: 14px; border-width: 1px; }
+
+  .hero {
+    display: block;
+    padding: 0 20px 72px;
+    text-align: left;
+    background: var(--forest-ink);
+  }
+  .hero::before { display: none; }
+  .hero::after { height: 54px; }
+  .hero .mobile-season-photo { margin: 0 -20px; height: min(116vw, 500px); }
+  .hero .mobile-season-photo > span { bottom: 62px; }
+  .hero-copy {
+    margin: -42px 0 0;
+    padding: 27px 22px 24px;
+    background: rgba(4, 48, 32, .96);
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+  }
+  .hero h1 { font-size: clamp(29px, 7.7vw, 34px); line-height: 1.28; letter-spacing: -.035em; }
+  .lead { margin-top: 22px; line-height: 1.9; }
+  .hero-actions { align-items: flex-start; margin-top: 26px; gap: 12px; }
+  .hero-note { justify-content: flex-start; margin-top: 26px; line-height: 1.7; }
+  .hero-visual { margin: 34px auto 58px; }
+
+  .card-section {
+    max-width: none;
+    margin: 0;
+    padding: 0 22px 100px;
+    color: var(--forest-ink);
+    background: var(--paper);
+  }
+  .card-section > .mobile-season-photo { margin: 0 -22px 46px; }
+  .card-section .section-heading,
+  .card-section .card-stage { position: relative; z-index: 1; }
+  .section-heading > p:not(.eyebrow) { margin-top: 20px; line-height: 1.9; }
+  .card-specs { margin: 26px 0; }
+  .card-specs div { grid-template-columns: 86px 1fr; padding: 12px 0; }
+  .card-stage { min-height: 480px; background: var(--cream); backdrop-filter: none; }
+
+  .map-section { padding: 0 16px 82px; background: var(--forest-deep); }
+  .map-section > .mobile-season-photo { margin: 0 -16px 46px; }
+  .map-heading { margin-bottom: 34px; gap: 18px; }
+  .map-heading > p { line-height: 1.9; }
+
+  .journey-section { padding: 0 20px 90px; background: var(--cream); }
+  .journey-section > .mobile-season-photo { margin: 0 -20px 46px; }
+  .journey-grid { gap: 12px; margin-top: 36px; }
+  .journey-grid article { padding: 28px 24px; background: var(--paper); backdrop-filter: none; }
+  .journey-grid h3 { margin-top: 22px; }
+
+  .section-heading h2,
+  .map-heading h2,
+  .journey-section h2 { font-size: clamp(30px, 8vw, 36px); line-height: 1.28; letter-spacing: -.04em; }
+  .card-title strong { font-size: 38px; }
+  .spot-panel h3 { font-size: 28px; }
+  .journey-grid h3 { font-size: 24px; }
+  .map-legend { left: 12px; right: 12px; bottom: 12px; }
+  footer { padding-block: 30px; }
+  .footer-brand img { width: 210px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

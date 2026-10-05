@@ -47,6 +47,10 @@ export default function Home() {
       </header>
 
       <section className="hero" id="top">
+        <div className="mobile-season-photo mobile-spring-photo">
+          <img src={asset("/season-spring.png")} alt="春の妙高に咲くカタクリ" />
+          <span>SPRING <b>春</b></span>
+        </div>
         <div className="season-backdrop" aria-hidden="true">
           {seasons.map((season) => (
             <div className="season-panel" key={season.name}>
@@ -56,7 +60,6 @@ export default function Home() {
           ))}
         </div>
         <div className="hero-copy">
-          <span className="mobile-season-label">SPRING / 春</span>
           <p className="eyebrow">MYOKO CARD × DIGITAL MAP</p>
           <h1>
             一枚のカードから、<br />
@@ -84,8 +87,11 @@ export default function Home() {
       </section>
 
       <section className="card-section" id="card">
+        <div className="mobile-season-photo mobile-summer-photo">
+          <img src={asset("/season-summer.png")} alt="緑豊かな夏の妙高高原と水辺" />
+          <span>SUMMER <b>夏</b></span>
+        </div>
         <div className="section-heading">
-          <span className="mobile-season-label">SUMMER / 夏</span>
           <p className="eyebrow green">THE FIRST CARD</p>
           <h2>妙高高原を、<br />持ち歩く。</h2>
           <p>
@@ -108,9 +114,12 @@ export default function Home() {
       </section>
 
       <section className="map-section" id="map">
+        <div className="mobile-season-photo mobile-autumn-photo">
+          <img src={asset("/season-autumn.png")} alt="紅葉に染まる秋の妙高の湿原" />
+          <span>AUTUMN <b>秋</b></span>
+        </div>
         <div className="map-heading">
           <div>
-            <span className="mobile-season-label">AUTUMN / 秋</span>
             <p className="eyebrow light">FROM CARD TO PLACE</p>
             <h2>カードの景色を、<br />地図で見つける。</h2>
           </div>
@@ -122,7 +131,10 @@ export default function Home() {
       </section>
 
       <section className="journey-section">
-        <span className="mobile-season-label">WINTER / 冬</span>
+        <div className="mobile-season-photo mobile-winter-photo">
+          <img src={asset("/season-winter.png")} alt="雪に包まれた冬の妙高山" />
+          <span>WINTER <b>冬</b></span>
+        </div>
         <p className="eyebrow green">HOW IT WORKS</p>
         <h2>小さなカードが、<br />次の行き先をつくる。</h2>
         <div className="journey-grid">
