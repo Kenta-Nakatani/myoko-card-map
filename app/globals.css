@@ -1,0 +1,329 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap");
+
+:root {
+  --forest: #0b5d3b;
+  --forest-deep: #073b29;
+  --forest-ink: #062d20;
+  --leaf: #b9dc55;
+  --leaf-pale: #e7f4bc;
+  --cream: #f5f1e8;
+  --paper: #fffdf8;
+  --ink: #17372b;
+  --muted: #65766e;
+  --line: rgba(11, 93, 59, 0.16);
+  --shadow: 0 28px 70px rgba(6, 45, 32, 0.18);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: "Noto Sans JP", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+button, a { font: inherit; }
+button { cursor: pointer; }
+img { display: block; max-width: 100%; }
+
+.site-header {
+  position: absolute;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 26px clamp(24px, 5vw, 76px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand { display: flex; align-items: center; gap: 12px; color: white; text-decoration: none; }
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 15px 15px 18px 12px;
+  color: var(--forest);
+  background: var(--leaf-pale);
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  transform: rotate(-4deg);
+}
+.brand strong { display: block; font-size: 15px; letter-spacing: 0.05em; }
+.brand small { display: block; margin-top: 2px; font-size: 10px; letter-spacing: 0.08em; opacity: 0.72; }
+.header-cta {
+  padding: 12px 20px;
+  color: white;
+  background: rgba(255,255,255,0.09);
+  border: 1px solid rgba(255,255,255,0.32);
+  border-radius: 999px;
+  backdrop-filter: blur(12px);
+}
+.header-cta:hover { background: white; color: var(--forest); }
+
+.hero {
+  position: relative;
+  min-height: 900px;
+  padding: 150px clamp(24px, 7vw, 112px) 90px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr);
+  align-items: center;
+  gap: clamp(50px, 7vw, 110px);
+  overflow: hidden;
+  color: white;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(185,220,85,0.18), transparent 34%),
+    linear-gradient(135deg, var(--forest-ink), var(--forest) 58%, #177a4f);
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 110px;
+  background: var(--paper);
+  clip-path: polygon(0 75%, 40% 92%, 69% 46%, 100% 68%, 100% 100%, 0 100%);
+}
+.hero-glow { position: absolute; border-radius: 50%; filter: blur(2px); opacity: 0.35; }
+.hero-glow-one { width: 430px; height: 430px; right: -190px; top: 80px; border: 1px solid rgba(255,255,255,0.28); }
+.hero-glow-two { width: 680px; height: 680px; right: -250px; top: -50px; border: 1px solid rgba(255,255,255,0.12); }
+.hero-copy, .hero-visual { position: relative; z-index: 2; }
+.eyebrow { margin: 0 0 18px; font-size: 11px; font-weight: 800; letter-spacing: 0.23em; }
+.eyebrow::before { content: ""; display: inline-block; width: 28px; height: 1px; margin: 0 12px 3px 0; background: currentColor; }
+.eyebrow.green { color: var(--forest); }
+.eyebrow.light { color: var(--leaf-pale); }
+.hero h1, .section-heading h2, .map-heading h2, .journey-section h2 {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  line-height: 1.16;
+}
+.hero h1 { margin: 0; font-size: clamp(46px, 6.2vw, 88px); }
+.hero h1 span { color: var(--leaf); }
+.lead { max-width: 620px; margin: 32px 0 0; font-size: 16px; line-height: 2; color: rgba(255,255,255,0.78); }
+.hero-actions { display: flex; align-items: center; gap: 28px; margin-top: 38px; }
+.primary-button {
+  padding: 16px 26px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--leaf);
+  color: var(--forest-ink);
+  font-weight: 800;
+  box-shadow: 0 12px 30px rgba(6,45,32,0.18);
+  transition: transform .2s, box-shadow .2s;
+}
+.primary-button:hover { transform: translateY(-2px); box-shadow: 0 18px 36px rgba(6,45,32,0.23); }
+.primary-button.dark { background: var(--forest); color: white; }
+.primary-button.full { width: 100%; }
+.text-button { color: white; background: none; border: 0; font-weight: 700; }
+.text-button span { display: inline-block; margin-left: 8px; color: var(--leaf); }
+.hero-note { display: flex; align-items: center; gap: 10px; margin-top: 52px; color: rgba(255,255,255,0.7); font-size: 11px; letter-spacing: 0.08em; }
+.hero-note p { margin: 0; }
+.note-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--leaf); box-shadow: 0 0 0 7px rgba(185,220,85,.1); }
+.logo-sticker {
+  position: absolute;
+  z-index: 3;
+  top: -40px;
+  right: -30px;
+  width: min(300px, 62%);
+  padding: 15px 20px;
+  background: white;
+  border-radius: 30px 22px 34px 18px;
+  transform: rotate(3deg);
+  box-shadow: 0 20px 50px rgba(5,36,25,0.22);
+}
+.hero-card-wrap { width: min(370px, 78vw); margin: 30px auto 0; transform: rotate(4deg); filter: drop-shadow(0 30px 34px rgba(2,28,18,.36)); }
+.tap-hint { margin: 18px 0 0; text-align: center; font-size: 11px; letter-spacing: .08em; color: rgba(255,255,255,.65); }
+.tap-hint span { color: var(--leaf); }
+
+.myoko-card {
+  position: relative;
+  display: block;
+  width: min(390px, 82vw);
+  aspect-ratio: 54 / 86;
+  padding: 0;
+  overflow: hidden;
+  color: white;
+  background: #0c3e2b;
+  border: 7px solid rgba(255,255,255,.92);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  text-align: left;
+}
+.myoko-card.compact { width: 100%; box-shadow: none; }
+.card-photo, .card-shade { position: absolute; inset: 0; width: 100%; height: 100%; }
+.card-photo { object-fit: cover; object-position: 52% center; }
+.card-shade {
+  background:
+    linear-gradient(180deg, rgba(4,24,18,.38), transparent 34%),
+    linear-gradient(0deg, rgba(4,28,20,.92), transparent 48%),
+    linear-gradient(90deg, rgba(5,30,21,.25), transparent 60%);
+}
+.card-topline {
+  position: absolute;
+  top: 25px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .2em;
+}
+.card-topline span:last-child { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid rgba(255,255,255,.7); border-radius: 50%; letter-spacing: 0; }
+.card-title { position: absolute; z-index: 2; left: 25px; right: 25px; bottom: 66px; }
+.card-title small { display: block; margin-bottom: 4px; font-size: 11px; letter-spacing: .16em; color: var(--leaf-pale); }
+.card-title strong { display: block; font-family: "Zen Kaku Gothic New", sans-serif; font-size: clamp(34px, 7vw, 50px); line-height: 1.1; letter-spacing: -.06em; }
+.card-title em { display: block; margin-top: 8px; font-size: 12px; font-style: normal; letter-spacing: .12em; }
+.mascot-sticker {
+  position: absolute;
+  z-index: 3;
+  right: 19px;
+  bottom: 178px;
+  width: 92px;
+  padding: 8px 6px;
+  background: white;
+  border-radius: 46% 54% 44% 55%;
+  transform: rotate(6deg);
+  filter: drop-shadow(0 8px 11px rgba(5,28,20,.28));
+}
+.card-footer-line {
+  position: absolute;
+  z-index: 3;
+  left: 24px;
+  right: 24px;
+  bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 11px;
+  border-top: 1px solid rgba(255,255,255,.36);
+  font-size: 8px;
+  letter-spacing: .08em;
+}
+
+.card-section {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 130px 40px 150px;
+  display: grid;
+  grid-template-columns: .8fr 1.2fr;
+  align-items: center;
+  gap: 90px;
+}
+.section-heading h2, .map-heading h2, .journey-section h2 { margin: 0; font-size: clamp(44px, 5vw, 68px); }
+.section-heading > p:not(.eyebrow) { margin: 26px 0 0; line-height: 2; color: var(--muted); }
+.card-specs { margin: 34px 0; border-top: 1px solid var(--line); }
+.card-specs div { display: grid; grid-template-columns: 110px 1fr; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.card-specs dt { color: var(--muted); font-size: 12px; }
+.card-specs dd { margin: 0; font-weight: 700; font-size: 13px; }
+.card-stage {
+  position: relative;
+  min-height: 680px;
+  display: grid;
+  place-items: center;
+  background: var(--cream);
+  border-radius: 50% 44% 48% 52% / 44% 52% 48% 56%;
+}
+.card-stage .myoko-card { z-index: 2; transform: rotate(-4deg); }
+.stage-ring { position: absolute; width: 78%; aspect-ratio: 1; border: 1px solid rgba(11,93,59,.2); border-radius: 50%; }
+.stage-label { position: absolute; color: var(--forest); font-size: 9px; font-weight: 800; letter-spacing: .24em; }
+.label-one { top: 14%; left: 10%; }
+.label-two { top: 34%; right: 7%; }
+.label-three { bottom: 11%; left: 13%; }
+
+.map-section { padding: 110px clamp(24px, 6vw, 92px) 120px; color: white; background: var(--forest-deep); }
+.map-heading { max-width: 1320px; margin: 0 auto 48px; display: grid; grid-template-columns: 1fr .8fr; gap: 80px; align-items: end; }
+.map-heading > p { max-width: 520px; margin: 0 0 8px; color: rgba(255,255,255,.66); line-height: 2; }
+.map-shell { max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: 1fr 360px; overflow: hidden; background: var(--paper); border-radius: 30px; box-shadow: 0 34px 90px rgba(2,24,16,.32); }
+.map-canvas-wrap { position: relative; min-height: 640px; background: #e5eadf; }
+.map-canvas { position: absolute; inset: 0; }
+.map-loading { position: absolute; z-index: 4; inset: 0; display: grid; place-items: center; color: var(--forest); background: #e8eee3; font-size: 12px; letter-spacing: .08em; }
+.map-legend { position: absolute; z-index: 3; left: 22px; bottom: 22px; padding: 11px 15px; color: var(--forest-ink); background: rgba(255,255,255,.92); border-radius: 999px; font-size: 9px; font-weight: 800; letter-spacing: .14em; box-shadow: 0 8px 25px rgba(5,45,31,.12); }
+.map-legend span { display: inline-block; width: 8px; height: 8px; margin-right: 7px; background: var(--forest); border-radius: 50%; }
+.map-marker { position: relative; width: 54px; height: 66px; padding: 0; background: transparent; border: 0; }
+.marker-core { position: absolute; z-index: 2; top: 0; left: 3px; display: grid; place-items: center; width: 48px; height: 48px; color: white; background: var(--forest); border: 4px solid white; border-radius: 50%; box-shadow: 0 8px 18px rgba(6,45,32,.35); font-size: 11px; font-weight: 800; line-height: 1; }
+.marker-core::after { content: ""; position: absolute; left: 50%; bottom: -9px; width: 14px; height: 14px; margin-left: -7px; background: var(--forest); transform: rotate(45deg); border-radius: 0 0 3px 0; }
+.marker-pulse { position: absolute; z-index: 1; left: 7px; bottom: 4px; width: 40px; height: 14px; background: rgba(11,93,59,.25); border-radius: 50%; }
+.spot-panel { padding: 24px; color: var(--ink); background: var(--paper); }
+.spot-image { position: relative; height: 200px; overflow: hidden; border-radius: 18px; }
+.spot-image img { width: 100%; height: 100%; object-fit: cover; }
+.spot-image span { position: absolute; right: 12px; top: 12px; padding: 8px 10px; color: white; background: var(--forest); border-radius: 999px; font-size: 9px; font-weight: 800; letter-spacing: .12em; }
+.spot-area { margin: 26px 0 6px; color: var(--forest); font-size: 9px; font-weight: 800; letter-spacing: .2em; }
+.spot-panel h3 { margin: 0; font-family: "Zen Kaku Gothic New", sans-serif; font-size: 32px; letter-spacing: -.06em; }
+.spot-description { margin: 16px 0 0; color: var(--muted); font-size: 13px; line-height: 1.85; }
+.spot-tags { display: flex; gap: 8px; margin-top: 18px; }
+.spot-tags span { padding: 6px 10px; color: var(--forest); background: var(--leaf-pale); border-radius: 999px; font-size: 10px; font-weight: 700; }
+.spot-actions { margin-top: 25px; display: grid; gap: 10px; }
+.sub-button { width: 100%; padding: 14px; color: var(--forest); background: transparent; border: 1px solid var(--line); border-radius: 999px; font-weight: 800; }
+.prototype-note { margin: 18px 0 0; color: #8a9791; font-size: 9px; text-align: center; }
+
+.journey-section { padding: 130px 40px 150px; text-align: center; background: var(--cream); }
+.journey-section h2 { max-width: 760px; margin-inline: auto; }
+.journey-grid { max-width: 1060px; margin: 70px auto 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.journey-grid article { padding: 38px 30px 36px; text-align: left; background: var(--paper); border-radius: 22px; box-shadow: 0 12px 35px rgba(17,55,42,.06); }
+.journey-grid span { color: var(--forest); font-size: 11px; font-weight: 800; letter-spacing: .16em; }
+.journey-grid h3 { margin: 32px 0 9px; font-family: "Zen Kaku Gothic New", sans-serif; font-size: 28px; }
+.journey-grid p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.8; }
+footer { padding: 38px clamp(24px, 6vw, 92px); display: flex; align-items: center; justify-content: space-between; color: white; background: var(--forest-ink); }
+.footer-brand { display: flex; align-items: center; gap: 12px; }
+.brand-mark.small { width: 34px; height: 34px; border-radius: 11px; font-size: 16px; }
+footer strong { font-size: 13px; }
+footer p { margin: 0; color: rgba(255,255,255,.55); font-size: 10px; }
+
+.modal { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; padding: 32px; background: rgba(3,25,17,.86); backdrop-filter: blur(14px); }
+.modal-card { max-height: 88vh; }
+.modal-card .myoko-card { width: min(390px, 80vw); max-height: 84vh; }
+.modal-close { position: fixed; top: 24px; right: 28px; width: 44px; height: 44px; color: white; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.24); border-radius: 50%; font-size: 25px; }
+
+@media (max-width: 980px) {
+  .hero { grid-template-columns: 1fr; min-height: 0; padding-top: 150px; text-align: center; }
+  .hero-copy { max-width: 760px; margin-inline: auto; }
+  .lead { margin-inline: auto; }
+  .hero-actions, .hero-note { justify-content: center; }
+  .hero-visual { width: min(540px, 100%); margin: 50px auto 80px; }
+  .card-section { grid-template-columns: 1fr; gap: 60px; }
+  .section-heading { max-width: 650px; }
+  .card-stage { min-height: 620px; }
+  .map-heading { grid-template-columns: 1fr; gap: 26px; }
+  .map-shell { grid-template-columns: 1fr; }
+  .map-canvas-wrap { min-height: 500px; }
+  .spot-panel { display: grid; grid-template-columns: 220px 1fr; column-gap: 24px; }
+  .spot-image { grid-row: 1 / span 8; height: 100%; min-height: 320px; }
+  .spot-area { margin-top: 8px; }
+}
+
+@media (max-width: 680px) {
+  .site-header { padding: 18px 18px; }
+  .brand small { display: none; }
+  .brand strong { font-size: 12px; }
+  .brand-mark { width: 39px; height: 39px; border-radius: 12px; font-size: 18px; }
+  .header-cta { padding: 10px 14px; font-size: 11px; }
+  .hero { padding: 120px 20px 70px; gap: 30px; }
+  .hero h1 { font-size: 44px; }
+  .lead { font-size: 14px; line-height: 1.9; }
+  .hero-actions { flex-direction: column; gap: 18px; }
+  .logo-sticker { right: -3px; top: -24px; width: 65%; }
+  .hero-note { margin-top: 35px; }
+  .card-section { padding: 100px 22px 110px; }
+  .card-stage { min-height: 530px; }
+  .card-stage .myoko-card { width: min(320px, 78vw); }
+  .stage-label { display: none; }
+  .map-section { padding: 90px 16px; }
+  .map-shell { border-radius: 22px; }
+  .map-canvas-wrap { min-height: 430px; }
+  .spot-panel { display: block; padding: 18px; }
+  .spot-image { min-height: 0; height: 190px; }
+  .spot-area { margin-top: 22px; }
+  .journey-section { padding: 100px 20px; }
+  .journey-grid { grid-template-columns: 1fr; margin-top: 45px; }
+  footer { align-items: flex-start; flex-direction: column; gap: 18px; }
+  .modal { padding: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}

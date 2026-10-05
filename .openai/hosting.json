@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "build": {
+    "command": "npm run build"
+  },
+  "static": {
+    "directory": "out"
+  },
+  "project_id": "appgprj_6ac32f67261081919d9a266d5c43b7b2"
+}

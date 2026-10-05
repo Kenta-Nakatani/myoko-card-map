@@ -1,0 +1,23 @@
+{
+  "name": "myoko-card-map",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "predev": "node ./scripts/copy-maplibre-worker.mjs",
+    "dev": "next dev --webpack",
+    "prebuild": "node ./scripts/copy-maplibre-worker.mjs",
+    "build": "next build --webpack",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "maplibre-gl": "latest",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "eslint": "latest",
+    "eslint-config-next": "latest"
+  }
+}
