@@ -9,7 +9,10 @@ import {
   setWorkerUrl,
 } from "maplibre-gl";
 
-setWorkerUrl("/maplibre/maplibre-gl-worker.mjs");
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const asset = (path) => `${basePath}${path}`;
+
+setWorkerUrl(asset("/maplibre/maplibre-gl-worker.mjs"));
 
 const mapStyle = {
   version: 8,
@@ -75,7 +78,7 @@ export default function MapPanel({ spot, onShowCard }) {
       map.on("load", async () => {
         map.addSource("myoko-boundary", {
           type: "geojson",
-          data: "/myoko-boundary.geojson",
+          data: asset("/myoko-boundary.geojson"),
         });
         map.addLayer({
           id: "myoko-boundary-fill",
@@ -132,7 +135,7 @@ export default function MapPanel({ spot, onShowCard }) {
       </div>
       <aside className="spot-panel">
         <div className="spot-image">
-          <img src="/myoko-kogen.jpg" alt="妙高高原の風景" />
+          <img src={asset("/myoko-kogen.jpg")} alt="妙高高原の風景" />
           <span>{spot.number}</span>
         </div>
         <p className="spot-area">{spot.area}</p>

@@ -4,6 +4,9 @@ import { useState } from "react";
 import MyokoCard from "@/components/MyokoCard";
 import MapPanel from "@/components/MapPanel";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const asset = (path) => `${basePath}${path}`;
+
 const spot = {
   title: "妙高高原",
   area: "MYOKO KOGEN",
@@ -14,10 +17,10 @@ const spot = {
 };
 
 const seasons = [
-  { name: "春", image: "/season-spring.png", position: "center" },
-  { name: "夏", image: "/season-summer.png", position: "center" },
-  { name: "秋", image: "/season-autumn.png", position: "center" },
-  { name: "冬", image: "/season-winter.png", position: "center" },
+  { name: "春", image: asset("/season-spring.png"), position: "center" },
+  { name: "夏", image: asset("/season-summer.png"), position: "center" },
+  { name: "秋", image: asset("/season-autumn.png"), position: "center" },
+  { name: "冬", image: asset("/season-winter.png"), position: "center" },
 ];
 
 export default function Home() {
@@ -28,10 +31,17 @@ export default function Home() {
   };
 
   return (
-    <main>
+    <main
+      style={{
+        "--season-spring-image": `url("${asset("/season-spring.png")}")`,
+        "--season-summer-image": `url("${asset("/season-summer.png")}")`,
+        "--season-autumn-image": `url("${asset("/season-autumn.png")}")`,
+        "--season-winter-image": `url("${asset("/season-winter.png")}")`,
+      }}
+    >
       <header className="site-header">
         <a className="brand" href="#top" aria-label="ページの先頭へ">
-          <img className="brand-logo-image" src="/campaign-logo.png" alt="妙高、好きになりました。カードから広がる、妙高めぐり" />
+          <img className="brand-logo-image" src={asset("/campaign-logo.png")} alt="妙高、好きになりました。カードから広がる、妙高めぐり" />
         </a>
         <button className="header-cta" onClick={() => scrollTo("map")}>地図</button>
       </header>
@@ -123,7 +133,7 @@ export default function Home() {
       </section>
 
       <footer>
-        <div className="footer-brand"><img src="/campaign-logo.png" alt="妙高、好きになりました。" /></div>
+        <div className="footer-brand"><img src={asset("/campaign-logo.png")} alt="妙高、好きになりました。" /></div>
         <p>カードから広がる、妙高めぐり｜デジタルマップ プロトタイプ</p>
       </footer>
 

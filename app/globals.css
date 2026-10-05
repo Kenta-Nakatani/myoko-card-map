@@ -441,7 +441,7 @@ footer p { font-size: 24pt; }
   .hero {
     background:
       linear-gradient(180deg, rgba(4, 40, 27, .38), rgba(4, 40, 27, .9)),
-      url('/season-spring.png') center / cover no-repeat;
+      var(--season-spring-image) center / cover no-repeat;
   }
   .hero::before {
     background: linear-gradient(180deg, rgba(4, 40, 27, .28), rgba(4, 40, 27, .72));
@@ -455,7 +455,7 @@ footer p { font-size: 24pt; }
     color: var(--forest-ink);
     background:
       linear-gradient(rgba(255, 253, 248, .84), rgba(245, 241, 232, .92)),
-      url('/season-summer.png') center / cover no-repeat;
+      var(--season-summer-image) center / cover no-repeat;
   }
   .card-section .section-heading,
   .card-section .card-stage { position: relative; z-index: 1; }
@@ -465,13 +465,13 @@ footer p { font-size: 24pt; }
   .map-section {
     background:
       linear-gradient(rgba(7, 59, 41, .82), rgba(6, 45, 32, .94)),
-      url('/season-autumn.png') center / cover no-repeat;
+      var(--season-autumn-image) center / cover no-repeat;
   }
 
   .journey-section {
     background:
       linear-gradient(rgba(245, 241, 232, .86), rgba(255, 253, 248, .94)),
-      url('/season-winter.png') center / cover no-repeat;
+      var(--season-winter-image) center / cover no-repeat;
   }
   .journey-section > .mobile-season-label { margin-inline: auto; }
   .journey-grid article { background: rgba(255, 253, 248, .92); backdrop-filter: blur(7px); }
