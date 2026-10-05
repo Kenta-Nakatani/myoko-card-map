@@ -13,6 +13,13 @@ const spot = {
     "山の稜線と水辺に映る空。カードを手に、妙高高原の静かな景色を探しに行こう。",
 };
 
+const seasons = [
+  { name: "春", image: "/season-spring.png", position: "center" },
+  { name: "夏", image: "/season-summer.png", position: "center" },
+  { name: "秋", image: "/season-autumn.png", position: "center" },
+  { name: "冬", image: "/season-winter.png", position: "center" },
+];
+
 export default function Home() {
   const [cardOpen, setCardOpen] = useState(false);
 
@@ -24,18 +31,20 @@ export default function Home() {
     <main>
       <header className="site-header">
         <a className="brand" href="#top" aria-label="ページの先頭へ">
-          <span className="brand-mark" aria-hidden="true">妙</span>
-          <span>
-            <strong>妙高カードマップ</strong>
-            <small>カードから広がる、妙高めぐり</small>
-          </span>
+          <img className="brand-logo-image" src="/campaign-logo.png" alt="妙高、好きになりました。カードから広がる、妙高めぐり" />
         </a>
-        <button className="header-cta" onClick={() => scrollTo("map")}>地図をひらく</button>
+        <button className="header-cta" onClick={() => scrollTo("map")}>地図</button>
       </header>
 
       <section className="hero" id="top">
-        <div className="hero-glow hero-glow-one" />
-        <div className="hero-glow hero-glow-two" />
+        <div className="season-backdrop" aria-hidden="true">
+          {seasons.map((season) => (
+            <div className="season-panel" key={season.name}>
+              <img src={season.image} alt="" style={{ objectPosition: season.position }} />
+              <span>{season.name}</span>
+            </div>
+          ))}
+        </div>
         <div className="hero-copy">
           <p className="eyebrow">MYOKO CARD × DIGITAL MAP</p>
           <h1>
@@ -56,9 +65,6 @@ export default function Home() {
         </div>
 
         <div className="hero-visual" aria-label="妙高高原カードのプレビュー">
-          <div className="logo-sticker">
-            <img src="/campaign-logo.png" alt="妙高、好きになりました。カードから広がる、妙高めぐり" />
-          </div>
           <div className="hero-card-wrap">
             <MyokoCard compact onClick={() => setCardOpen(true)} />
           </div>
@@ -113,7 +119,7 @@ export default function Home() {
       </section>
 
       <footer>
-        <div className="footer-brand"><span className="brand-mark small">妙</span><strong>妙高、好きになりました。</strong></div>
+        <div className="footer-brand"><img src="/campaign-logo.png" alt="妙高、好きになりました。" /></div>
         <p>カードから広がる、妙高めぐり｜デジタルマップ プロトタイプ</p>
       </footer>
 

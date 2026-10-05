@@ -40,6 +40,7 @@ export default function MapPanel({ spot, onShowCard }) {
   useEffect(() => {
     let active = true;
     let marker;
+    let resizeObserver;
 
     async function createMap() {
       if (!active || !mapContainer.current || mapRef.current) return;
@@ -48,7 +49,7 @@ export default function MapPanel({ spot, onShowCard }) {
         container: mapContainer.current,
         style: mapStyle,
         center: spot.coordinates,
-        zoom: 10.2,
+        zoom: 9.3,
         attributionControl: false,
       });
 
@@ -64,11 +65,42 @@ export default function MapPanel({ spot, onShowCard }) {
         .setLngLat(spot.coordinates)
         .addTo(map);
 
+      resizeObserver = new ResizeObserver(() => map.resize());
+      resizeObserver.observe(mapContainer.current);
+
       markerElement.addEventListener("click", () => {
         map.flyTo({ center: spot.coordinates, zoom: 12.2, duration: 900 });
       });
 
-      map.on("load", () => {
+      map.on("load", async () => {
+        map.addSource("myoko-boundary", {
+          type: "geojson",
+          data: "/myoko-boundary.geojson",
+        });
+        map.addLayer({
+          id: "myoko-boundary-fill",
+          type: "fill",
+          source: "myoko-boundary",
+          paint: {
+            "fill-color": "#d82f31",
+            "fill-opacity": 0.07,
+          },
+        });
+        map.addLayer({
+          id: "myoko-boundary-line",
+          type: "line",
+          source: "myoko-boundary",
+          paint: {
+            "line-color": "#d82f31",
+            "line-width": 4,
+            "line-opacity": 0.95,
+          },
+        });
+        map.fitBounds(
+          [[138.02, 36.72], [138.39, 37.12]],
+          { padding: 42, duration: 0 }
+        );
+        map.resize();
         if (active) setMapReady(true);
       });
       mapRef.current = map;
@@ -77,6 +109,7 @@ export default function MapPanel({ spot, onShowCard }) {
     createMap();
     return () => {
       active = false;
+      resizeObserver?.disconnect();
       marker?.remove();
       mapRef.current?.remove();
       mapRef.current = null;
@@ -92,7 +125,10 @@ export default function MapPanel({ spot, onShowCard }) {
       <div className="map-canvas-wrap">
         {!mapReady && <div className="map-loading">地図を読み込んでいます…</div>}
         <div ref={mapContainer} className="map-canvas" aria-label="妙高高原周辺の地図" />
-        <div className="map-legend"><span /> CARD SPOT</div>
+        <div className="map-legend">
+          <span className="legend-boundary" /> 妙高市境
+          <span className="legend-spot" /> カード地点
+        </div>
       </div>
       <aside className="spot-panel">
         <div className="spot-image">
@@ -108,6 +144,9 @@ export default function MapPanel({ spot, onShowCard }) {
           <button className="sub-button" onClick={onShowCard}>カードを見る</button>
         </div>
         <p className="prototype-note">※ 地点・説明はプロトタイプ用の仮情報です。</p>
+        <a className="boundary-credit" href="https://geoshape.ex.nii.ac.jp/city/resource/15217A2005.html" target="_blank" rel="noreferrer">
+          市境データ：歴史的行政区域データセットβ版（CODH作成）
+        </a>
       </aside>
     </div>
   );
