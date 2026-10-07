@@ -119,3 +119,15 @@ body { background: var(--paper); }
 .shop-gallery img { width: 100%; border-radius: 14px; height: auto; }
 .shop-gallery figcaption { font-size: 12px; color: var(--muted); margin-top: 12px; }
 @media(max-width:680px) { .pocket-card-stage .long-title .card-title strong { font-size: 18px; } }
+
+.pocket-seasons .season-location { display: block; color: var(--ink); font-size: 17px; font-weight: 500; letter-spacing: .04em; }
+.pocket-seasons .season-location-note { display: block; font-size: 11px; margin-top: 3px; }
+.pocket-seasons .season-caption { display: block; margin-top: 9px; }
+
+.shop-card-dialog { padding: 48px 18px 18px; }
+.shop-card-dialog .myoko-card { width: min(260px, 65vw, calc((100svh - 160px) * .628)); }
+.shop-card-dialog .card-title strong { font-size: 30px; }
+
+.map-place-picker { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 18px; }
+.map-place-picker button { min-height: 44px; padding: 9px 10px; font-size: 12px; border: 1px solid var(--line); border-radius: 24px; color: var(--muted); background: var(--paper); }
+.map-place-picker button[aria-pressed='true'] { color: white; background: var(--forest); border-color: var(--forest); }
