@@ -1,5 +1,6 @@
 import "./globals.css";
 import "maplibre-gl/dist/maplibre-gl.css";
+import "./pocket.css";
 
 export const metadata = {
   title: "妙高、好きになりました。｜妙高カードマップ",

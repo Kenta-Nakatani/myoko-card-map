@@ -90,15 +90,15 @@ export default function MapPanel({ spot, onShowCard }) {
       <div className="map-shell">
         <div className="map-canvas-wrap">
           {!mapReady && <div className="map-loading" role="status">{mapError ? <><p>地図を読み込めませんでした。通信状況をご確認ください。</p><button className="sub-button" type="button" onClick={() => { setMapReady(false); setMapError(false); setSelected(false); setAttempt((value) => value + 1); }}>もう一度読み込む</button></> : "地図を読み込んでいます…"}</div>}
-          <div ref={mapContainer} className="map-canvas" aria-label="妙高高原周辺の地図" />
-          <div className="map-legend"><span className="legend-boundary" />妙高市境<span className="legend-spot" />カード地点（仮）</div>
+          <div ref={mapContainer} className="map-canvas" aria-label="妙高高原・イモリ池周辺の地図" />
+          <div className="map-legend"><span className="legend-boundary" />妙高市境<span className="legend-spot" />イモリ池</div>
         </div>
         <aside className="spot-panel" id="spot-detail" aria-labelledby="spot-title">
           <div className="spot-image"><img src={asset("/myoko-kogen.jpg")} alt="カードに使われている妙高高原の風景" loading="lazy" width="800" height="500" /><span>カード {spot.number}</span></div>
           <p className="spot-area">{spot.area}</p><h3 id="spot-title" ref={headingRef} tabIndex={-1}>{spot.title}</h3><p className="spot-description">{spot.description}</p>
           <p className="spot-status" role="status">{selected ? "01 ／ このカードの地点を選択中" : "地図の01から、カードの地点へ"}</p>
           <div className="spot-actions"><button className="button" type="button" onClick={focusSpot} disabled={!mapReady}>地点を拡大</button><button className="sub-button" type="button" onClick={onShowCard}>カードを見る</button><button className="sub-button" type="button" onClick={showArea} disabled={!mapReady}>妙高全体を見る</button></div>
-          <p className="prototype-note">地点は試作用の仮位置です。写真の正確な撮影場所を示すものではありません。</p>
+          <p className="prototype-note">地図はイモリ池の位置を示しています。</p>
         </aside>
       </div>
       <div className="map-credit"><p>指2本で地図を移動できます。PCではCtrl＋スクロールで拡大・縮小。</p><a href="https://geoshape.ex.nii.ac.jp/city/resource/15217A2005.html" target="_blank" rel="noreferrer">市境データ：CODH 歴史的行政区域データセットβ版</a></div>
