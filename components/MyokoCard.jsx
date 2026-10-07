@@ -2,12 +2,13 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const asset = (path) => `${basePath}${path}`;
 
 export default function MyokoCard({ compact = false, onClick }) {
+  const Element = onClick ? "button" : "div";
   return (
-    <button
+    <Element
       className={`myoko-card ${compact ? "compact" : ""}`}
       onClick={onClick}
-      aria-label="妙高高原カードを拡大表示"
-      type="button"
+      aria-label={onClick ? "妙高高原カードを拡大表示" : "妙高高原カード"}
+      type={onClick ? "button" : undefined}
     >
       <img className="card-photo" src={asset("/myoko-kogen.jpg")} alt="山と水辺に空が映る妙高高原の風景" />
       <span className="card-shade" />
@@ -22,6 +23,6 @@ export default function MyokoCard({ compact = false, onClick }) {
       <span className="mascot-sticker">
         <img src={asset("/myoko-mascot.png")} alt="妙高市のキャラクター" />
       </span>
-    </button>
+    </Element>
   );
 }
