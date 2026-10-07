@@ -1,162 +1,60 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import MyokoCard from "@/components/MyokoCard";
 import MapPanel from "@/components/MapPanel";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const asset = (path) => `${basePath}${path}`;
-
 const spot = {
-  title: "妙高高原",
-  area: "MYOKO KOGEN",
-  number: "CARD 01",
+  title: "妙高高原", area: "新潟県 妙高市", number: "01",
   coordinates: [138.177, 36.87],
-  description:
-    "山の稜線と水辺に映る空。カードを手に、妙高高原の静かな景色を探しに行こう。",
+  description: "山と水辺に空が映る、妙高高原の風景。カードの写真を眺めながら、周辺の位置を地図で確かめてみてください。",
 };
-
 const seasons = [
-  { name: "春", image: asset("/season-spring.png"), position: "center" },
-  { name: "夏", image: asset("/season-summer.png"), position: "center" },
-  { name: "秋", image: asset("/season-autumn.png"), position: "center" },
-  { name: "冬", image: asset("/season-winter.png"), position: "center" },
+  { name: "春", image: "/season-spring.png", alt: "春の妙高に咲くカタクリ", caption: "足元に、春の色。" },
+  { name: "夏", image: "/season-summer.png", alt: "緑豊かな夏の妙高高原と水辺", caption: "緑と水辺の、妙高高原。" },
+  { name: "秋", image: "/season-autumn.png", alt: "紅葉に染まる秋の妙高の湿原", caption: "山の景色が、色づく季節。" },
+  { name: "冬", image: "/season-winter.png", alt: "雪に包まれた冬の妙高山", caption: "雪に包まれる、山の輪郭。" },
 ];
 
 export default function Home() {
+  const [season, setSeason] = useState(1);
   const [cardOpen, setCardOpen] = useState(false);
-
-  const scrollTo = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
+  const dialog = useRef(null);
+  const current = seasons[season];
+  useEffect(() => {
+    if (!cardOpen) return;
+    const element = dialog.current;
+    const previousOverflow = document.body.style.overflow;
+    element.showModal();
+    document.body.style.overflow = "hidden";
+    return () => { element.close(); document.body.style.overflow = previousOverflow; };
+  }, [cardOpen]);
 
   return (
-    <main
-      style={{
-        "--season-spring-image": `url("${asset("/season-spring.png")}")`,
-        "--season-summer-image": `url("${asset("/season-summer.png")}")`,
-        "--season-autumn-image": `url("${asset("/season-autumn.png")}")`,
-        "--season-winter-image": `url("${asset("/season-winter.png")}")`,
-      }}
-    >
+    <>
+      <a className="skip-link" href="#main">本文へ移動</a>
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="ページの先頭へ">
-          <img className="brand-logo-image" src={asset("/campaign-logo.png")} alt="妙高、好きになりました。カードから広がる、妙高めぐり" />
-        </a>
-        <button className="header-cta" onClick={() => scrollTo("map")}>地図</button>
+        <a className="brand" href="#top" aria-label="ページの先頭へ"><img src={asset("/campaign-logo.png")} alt="妙高、好きになりました。" width="210" height="100" /></a>
+        <nav aria-label="ページ内メニュー"><a href="#seasons">四季の景色</a><a className="header-map" href="#map">地図を見る <span aria-hidden="true">↗</span></a></nav>
       </header>
-
-      <section className="hero" id="top">
-        <div className="mobile-season-photo mobile-spring-photo">
-          <img src={asset("/season-spring.png")} alt="春の妙高に咲くカタクリ" />
-          <span>SPRING <b>春</b></span>
-        </div>
-        <div className="season-backdrop" aria-hidden="true">
-          {seasons.map((season) => (
-            <div className="season-panel" key={season.name}>
-              <img src={season.image} alt="" style={{ objectPosition: season.position }} />
-              <span>{season.name}</span>
-            </div>
-          ))}
-        </div>
-        <div className="hero-copy">
-          <p className="eyebrow">MYOKO CARD × DIGITAL MAP</p>
-          <h1>
-            一枚のカードから、<br />
-            <span>妙高を歩きたくなる。</span>
-          </h1>
-          <p className="lead">
-            気になった風景をスマホの裏へ。カードの場所をデジタルマップで見つけて、次の妙高へ出かけよう。
-          </p>
-          <div className="hero-actions">
-            <button className="primary-button" onClick={() => scrollTo("card")}>カードを見る</button>
-            <button className="text-button" onClick={() => scrollTo("map")}>地図から探す <span>↗</span></button>
-          </div>
-          <div className="hero-note">
-            <span className="note-dot" />
-            <p><strong>PROTOTYPE 01</strong>　妙高高原をカードにしました</p>
-          </div>
-        </div>
-
-        <div className="hero-visual" aria-label="妙高高原カードのプレビュー">
-          <div className="hero-card-wrap">
-            <MyokoCard compact onClick={() => setCardOpen(true)} />
-          </div>
-          <p className="tap-hint"><span>↗</span> タップしてカードを拡大</p>
-        </div>
-      </section>
-
-      <section className="card-section" id="card">
-        <div className="mobile-season-photo mobile-summer-photo">
-          <img src={asset("/season-summer.png")} alt="緑豊かな夏の妙高高原と水辺" />
-          <span>SUMMER <b>夏</b></span>
-        </div>
-        <div className="section-heading">
-          <p className="eyebrow green">THE FIRST CARD</p>
-          <h2>妙高高原を、<br />持ち歩く。</h2>
-          <p>
-            景色の印象を主役にした、スマートフォンの背面に入るカード。表面は「この場所へ行ってみたい」と感じる入口です。
-          </p>
-          <dl className="card-specs">
-            <div><dt>場所</dt><dd>妙高高原</dd></div>
-            <div><dt>テーマ</dt><dd>山・水辺・空</dd></div>
-            <div><dt>ナビゲーター</dt><dd>妙高市キャラクター</dd></div>
-          </dl>
-          <button className="primary-button dark" onClick={() => setCardOpen(true)}>カード表面を拡大</button>
-        </div>
-        <div className="card-stage">
-          <div className="stage-ring" />
-          <MyokoCard onClick={() => setCardOpen(true)} />
-          <span className="stage-label label-one">PHOTO</span>
-          <span className="stage-label label-two">PLACE</span>
-          <span className="stage-label label-three">DISCOVERY</span>
-        </div>
-      </section>
-
-      <section className="map-section" id="map">
-        <div className="mobile-season-photo mobile-autumn-photo">
-          <img src={asset("/season-autumn.png")} alt="紅葉に染まる秋の妙高の湿原" />
-          <span>AUTUMN <b>秋</b></span>
-        </div>
-        <div className="map-heading">
-          <div>
-            <p className="eyebrow light">FROM CARD TO PLACE</p>
-            <h2>カードの景色を、<br />地図で見つける。</h2>
-          </div>
-          <p>
-            カード裏面のQRコードから、この画面へ。撮影エリアの位置や見どころを確認できる体験を想定しています。
-          </p>
-        </div>
-        <MapPanel spot={spot} onShowCard={() => setCardOpen(true)} />
-      </section>
-
-      <section className="journey-section">
-        <div className="mobile-season-photo mobile-winter-photo">
-          <img src={asset("/season-winter.png")} alt="雪に包まれた冬の妙高山" />
-          <span>WINTER <b>冬</b></span>
-        </div>
-        <p className="eyebrow green">HOW IT WORKS</p>
-        <h2>小さなカードが、<br />次の行き先をつくる。</h2>
-        <div className="journey-grid">
-          <article><span>01</span><h3>選ぶ</h3><p>気になった妙高の風景を、カードとして選ぶ。</p></article>
-          <article><span>02</span><h3>読み取る</h3><p>カード裏面のQRコードから、デジタルマップへ。</p></article>
-          <article><span>03</span><h3>めぐる</h3><p>地図で場所を知り、実際の妙高を訪れてみる。</p></article>
-        </div>
-      </section>
-
-      <footer>
-        <div className="footer-brand"><img src={asset("/campaign-logo.png")} alt="妙高、好きになりました。" /></div>
-        <p>カードから広がる、妙高めぐり｜デジタルマップ プロトタイプ</p>
-      </footer>
-
-      {cardOpen && (
-        <div className="modal" role="dialog" aria-modal="true" aria-label="妙高高原カード拡大表示" onClick={() => setCardOpen(false)}>
-          <button className="modal-close" aria-label="閉じる" onClick={() => setCardOpen(false)}>×</button>
-          <div className="modal-card" onClick={(event) => event.stopPropagation()}>
-            <MyokoCard />
-          </div>
-        </div>
-      )}
-    </main>
+      <main id="main">
+        <section className="hero" id="top" aria-labelledby="hero-title">
+          <img className="hero-photo" src={asset("/season-summer.png")} alt="緑豊かな妙高高原の水辺" fetchPriority="high" />
+          <div className="hero-content"><p className="section-label">新潟県・妙高市</p><h1 id="hero-title">カードの先に、<br />妙高の景色。</h1><p className="hero-description">手元の一枚から、気になった場所へ。<br />写真と地図で、妙高をめぐる。</p><a className="button light" href="#map">カードの場所を地図で見る <span aria-hidden="true">↗</span></a></div>
+          <a className="hero-scroll" href="#seasons">四季の景色へ <span aria-hidden="true">↓</span></a><span className="hero-location">妙高高原 ／ 夏の風景</span>
+        </section>
+        <section className="seasons-section section-wrap" id="seasons" aria-labelledby="seasons-title">
+          <div className="section-intro"><p className="section-label">01 ／ 妙高の四季</p><h2 id="seasons-title">季節が変わる。<br />景色も変わる。</h2><p>花の咲く春、緑の夏、紅葉の秋、雪の冬。<br className="desktop-break" />同じ妙高でも、季節ごとに違う表情があります。</p></div>
+          <div className="season-viewer"><div className="season-controls" role="group" aria-label="見たい季節を選ぶ">{seasons.map((item, index) => <button key={item.name} type="button" aria-pressed={season === index} aria-controls="season-photo" onClick={() => setSeason(index)}><span className="season-number" aria-hidden="true">0{index + 1}</span>{item.name}</button>)}</div><figure id="season-photo"><img src={asset(current.image)} alt={current.alt} loading="lazy" width="1200" height="750" /><figcaption aria-live="polite"><span>{current.name}の妙高</span><span>{current.caption}</span></figcaption></figure></div>
+        </section>
+        <section className="map-section" id="map" aria-labelledby="map-title"><div className="section-wrap"><div className="map-heading"><div><p className="section-label">02 ／ カードから地図へ</p><h2 id="map-title">この景色は、どこに？</h2></div><p>地図の「01」を選ぶと、カードの情報を確認できます。<br />まずは妙高高原の位置を見てみましょう。</p></div><MapPanel spot={spot} onShowCard={() => setCardOpen(true)} /></div></section>
+        <section className="card-section section-wrap" id="card" aria-labelledby="card-title"><div className="card-stage"><MyokoCard onClick={() => setCardOpen(true)} /><p>カードをタップして拡大</p></div><div className="card-copy"><p className="section-label">03 ／ 手元に残る風景</p><h2 id="card-title">妙高を、持ち歩く。</h2><p>気になった風景を、スマートフォンの背面へ。<br />カード裏面のQRコードが、景色と場所をつなぎます。</p><dl className="card-specs"><div><dt>カード</dt><dd>01 ／ 妙高高原</dd></div><div><dt>風景</dt><dd>山・水辺・空</dd></div><div><dt>使い方</dt><dd>QRを読み取って、地図で場所を確認</dd></div></dl><button className="button" type="button" onClick={() => setCardOpen(true)}>カードを大きく見る <span aria-hidden="true">↗</span></button></div></section>
+        <section className="guide-section" aria-labelledby="guide-title"><div className="section-wrap"><p className="section-label">カードの楽しみ方</p><h2 id="guide-title">一枚から、次の行き先へ。</h2><ol className="guide-list"><li><span>01</span><h3>風景を選ぶ</h3><p>気になった妙高の景色を、手元のカードに。</p></li><li><span>02</span><h3>場所を知る</h3><p>QRを読み取り、地図と写真を見比べる。</p></li><li><span>03</span><h3>出かけてみる</h3><p>気になった場所を、次の妙高めぐりのきっかけに。</p></li></ol></div></section>
+      </main>
+      <footer><div><strong>妙高、好きになりました。</strong><p>カードから広がる、妙高めぐり</p></div><a href="#top">ページの先頭へ ↑</a></footer>
+      {cardOpen && <dialog ref={dialog} className="card-dialog" aria-label="妙高高原カード拡大表示" onCancel={() => setCardOpen(false)} onClose={() => setCardOpen(false)} onClick={(event) => { if (event.target === event.currentTarget) setCardOpen(false); }}><button className="modal-close" type="button" onClick={() => setCardOpen(false)} autoFocus aria-label="カード拡大を閉じる">閉じる ×</button><MyokoCard /></dialog>}
+    </>
   );
 }
