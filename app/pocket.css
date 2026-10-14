@@ -131,3 +131,16 @@ body { background: var(--paper); }
 .map-place-picker { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 18px; }
 .map-place-picker button { min-height: 44px; padding: 9px 10px; font-size: 12px; border: 1px solid var(--line); border-radius: 24px; color: var(--muted); background: var(--paper); }
 .map-place-picker button[aria-pressed='true'] { color: white; background: var(--forest); border-color: var(--forest); }
+
+.qr-arrival, .registration-hint, .registration-success, .link-notice { margin-top: 20px; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: #eaf0df; font-size: 13px; }
+.registration-hint strong { font-weight: 500; }
+.registration-hint p, .registration-success > p { color: var(--muted); font-size: 12px; margin-top: 8px; }
+.registered-label { font-size: 13px; color: var(--forest); padding: 10px; }
+.distribution-note { font-size: 11px; color: var(--muted); margin-top: 12px; }
+.pocket-button { text-decoration: none; }
+.registration-success h2 { font-size: 22px; margin: 12px 0; }
+.registration-success .collection-count { margin-top: 0; }
+.registration-success .pocket-button { margin-top: 14px; }
+.next-place { display: flex; align-items: center; text-align: left; gap: 14px; width: 100%; margin-top: 12px; border: 1px solid var(--line); background: var(--paper); color: var(--ink); padding: 8px; border-radius: 12px; font-size: 13px; }
+.next-place img { width: 66px; height: 54px; object-fit: cover; border-radius: 8px; }
+.qr-unregistered > img { filter: grayscale(1); opacity: .65; }
